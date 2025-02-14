@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Javascript</title>
+</head>
+
+<body>
+    <script>
+        function giaiPhuongTrinhBacNhat(a, b) {
+            if (a == 0 && b == 0) {
+                console.log(a + "x + " + b + " = 0");
+                console.log("Phương trình vô số nghiệm ");
+            }
+
+            else if (a == 0 && b != 0) {
+                console.log(a + "x + " + b + " = 0");
+                console.log("Phương trình vô nghiệm ");
+            }
+
+            else {
+                console.log(a + "x + " + b + " = 0");
+                let x = -b / a;
+                console.log("Phương trình có nghiệm duy nhất: " + x);
+            }
+        }
+        giaiPhuongTrinhBacNhat(0, 0)
+        giaiPhuongTrinhBacNhat(0, 10)
+        giaiPhuongTrinhBacNhat(10, 20)
+
+        function giaiPhuongTrinhBacHai(a, b, c) {
+            let delta;
+            delta = b * b - 4 * a * c;
+
+            if (delta > 0) {
+                console.log("delta = " + delta);
+                console.log("Phương trình có hai nghiệm phân biệt.");
+
+                let x1 = (-b + Math.sqrt(delta)) / 2 * a;
+                console.log("x1 = " + x1)
+                let x2 = (-b - Math.sqrt(delta)) / 2 * a;
+                console.log("x2 = " + x2)
+            }
+            else if (delta == 0) {
+                console.log("delta = " + delta);
+                console.log("Phương trình có nghiệm kép.");
+
+                let x = -b / 2 * a;
+                console.log("kết quả: " + x)
+            }
+            else {
+                console.log("delta = " + delta);
+                console.log("Phương trình không có nghiệm thực, nghiệm là số phức.");
+            }
+        }
+        giaiPhuongTrinhBacHai(10, 20, 5)
+        giaiPhuongTrinhBacHai(0, 0, 0)
+        giaiPhuongTrinhBacHai(10, 5, 5)
+
+        function tinhNamNhuan(year) {
+            if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
+                console.log("Năm " + year + " là năm nhuận");
+            }
+            else {
+                console.log("Năm " + year + " không phải là năm nhuận");
+            }
+        }
+        tinhNamNhuan(2004)
+        tinhNamNhuan(2025)
+
+        function tinhCanChi(year) {
+            // Danh sách các Can và Chi
+            const can = ['Giáp', 'Ất', 'Bính', 'Đinh', 'Mậu', 'Kỷ', 'Canh', 'Tân', 'Nhâm', 'Quý'];
+            const chi = ['Tý', 'Sửu', 'Dần', 'Mão', 'Thìn', 'Tỵ', 'Ngọ', 'Mùi', 'Thân', 'Dậu', 'Tuất', 'Hợi'];
+
+            const tinhCan = (year - 4) % 10;
+            const tinhChi = (year - 4) % 12;
+
+            console.log("Năm " + year + " là năm: ");
+            return can[tinhCan] + " " + chi[tinhChi];
+        }
+        console.log(tinhCanChi(2000));
+
+        console.log("Phép cộng: ");
+
+
+        function congHaiChuoiSo(soThu1, soThu2) {
+            let chuoiKetQua = "";
+            let tam = 0;
+            let dauCong;
+            let doDaiChuoi = Math.max(soThu1.length, soThu2.length);
+
+            soThu1 = soThu1.padStart(doDaiChuoi, "0");
+            soThu2 = soThu2.padStart(doDaiChuoi, "0");
+
+            console.log(soThu1);
+            console.log("+");
+            console.log(soThu2);
+            console.log("=");
+
+            for (let i = doDaiChuoi - 1; i >= 0; i--) {
+                let soNguyenThu1 = parseInt(soThu1[i]);
+                let soNguyenThu2 = parseInt(soThu2[i]);
+                let tong = soNguyenThu1 + soNguyenThu2 + tam;
+
+                tam = Math.floor(tong / 10);
+                chuoiKetQua = (tong % 10) + chuoiKetQua;
+            }
+
+            if (tam) {
+                chuoiKetQua = tam + chuoiKetQua;
+            }
+
+            return chuoiKetQua;
+        }
+        console.log(congHaiChuoiSo("123456789123456789009876543212345678909098765456789876543212345678987878987654321", "1234567890123456789012345678901234567891234567890123456789"));
+
+        console.log("Phép nhân: ");
+
+        function nhanHaiChuoiSo(soThu1, soThu2) {
+            if (soThu1 === "0" || soThu2 === "0") {
+                return "0";
+            }
+
+            const doDaiChuoi1 = soThu1.length;
+            const doDaiChuoi2 = soThu2.length;
+            const ketQua = new Array(doDaiChuoi1 + doDaiChuoi2).fill(0);
+
+            console.log(soThu1);
+            console.log("*");
+            console.log(soThu2);
+            console.log("=");
+
+            for (let i = doDaiChuoi1 - 1; i >= 0; i--) {
+                for (let j = doDaiChuoi2 - 1; j >= 0; j--) {
+                    const nhanHaiChuoi = (soThu1[i] - "0") * (soThu2[j] - "0");
+                    const tong = nhanHaiChuoi + ketQua[i + j + 1];
+                    ketQua[i + j + 1] = tong % 10;
+                    ketQua[i + j] += Math.floor(tong / 10);
+                }
+            }
+
+            let chuoiKetQua = "";
+            for (let i = 0; i < ketQua.length; i++) {
+                if (!(chuoiKetQua === "" && ketQua[i] === 0)) {
+                    chuoiKetQua += ketQua[i];
+                }
+            }
+
+            return chuoiKetQua;
+        }
+
+        const soThu1 = "1234567890123456789012345678";
+        const soThu2 = '9234567891234567890098765432';
+        console.log(nhanHaiChuoiSo(soThu1, soThu2));
+
+
+    </script>
+</body>
+
+</html>
